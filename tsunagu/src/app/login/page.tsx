@@ -17,14 +17,14 @@ export default function login() {
     e.preventDefault(); // ページリロード防止
 
     try {
-      const res = await fetch('http://localhost:3001/auth/sign_in', {
+      const res = await fetch('http://localhost:3001/student_auth/sign_in', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email,
-          password,
+          email:    email,
+          password: password
         }),
       });
 

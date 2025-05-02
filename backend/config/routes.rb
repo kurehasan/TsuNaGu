@@ -1,20 +1,27 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-    sessions: 'auth/sessions'
-  }
-    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Student 用の認証エンドポイント
+  mount_devise_token_auth_for  'Student', at: 'student_auth', controllers: {           # 必要ならコントローラをカスタム
+      registrations: 'auth/registrations',
+      sessions:      'auth/sessions'
+    }
+  
+  
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Company 用の認証エンドポイント
+  mount_devise_token_auth_for(
+    'Company',
+    at: 'company_auth',
+    controllers: {
+      registrations: 'auth/registrations',
+      sessions:      'auth/sessions'
+    }
+  )
 
   # config/routes.rb
   namespace :api do
     namespace :v1 do
-     get 'hello', to: 'hello#index'
+      get 'hello', to: 'hello#index'
+      resources :users, only: [:index]
     end
   end
 
