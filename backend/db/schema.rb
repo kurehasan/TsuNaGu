@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_02_040344) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_04_031231) do
   create_table "companies", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -24,9 +24,24 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_02_040344) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
     t.index ["email"], name: "index_companies_on_email", unique: true
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_companies_on_uid_and_provider", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.integer "company_id", null: false
+    t.integer "student_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_messages_on_company_id"
+    t.index ["student_id"], name: "index_messages_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -80,4 +95,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_02_040344) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
+
+  add_foreign_key "messages", "companies"
+  add_foreign_key "messages", "students"
 end
