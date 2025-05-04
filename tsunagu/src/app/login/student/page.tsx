@@ -40,7 +40,7 @@ export default function login() {
       localStorage.setItem('client', client || '');
       localStorage.setItem('uid', uid || '');
 
-      window.location.href = '/mypage';
+      window.location.href = '/mypage/student';
     } catch (err) {
       alert('ログインに失敗しました');
       console.error(err);

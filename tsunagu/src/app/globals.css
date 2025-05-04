@@ -65,11 +65,11 @@ header,footer{
   right: 30;
 }
 
-.header-list-mypage{
+.header-list-last-second{
   list-style: none;
   position: absolute;
   padding: 0 20px;
-  right: 120;
+  right: 110;
 }
 
 /* ホーム画面 */
@@ -183,4 +183,43 @@ input{
   height: 40px;
   display: block;
   margin: 15 auto;
+}
+
+/* ログアウトモーダル */
+.modal-back{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.623);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal{
+  padding: 24px;
+  background-color: #b6e5fd;
+  border-radius: 10px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+}
+
+.modal-title{
+  padding-bottom: 20px;
+}
+
+.modal-cancel{
+  border : 3px solid #505cfa;
+  margin-right: 40px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.modal-comfirm{
+  border : 3px solid #fa5050;
+  padding: 10px;
+  border-radius: 10px;
 }
