@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   # config/routes.rb
   namespace :api do
     namespace :v1 do
+      get "students/index"
+      get "students/show"
       get 'hello', to: 'hello#index'
       resources :users, only: [:index]
       resources :students, only: [:index, :show]
