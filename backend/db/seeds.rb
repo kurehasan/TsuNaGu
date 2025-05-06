@@ -1,9 +1,18 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# backend/db/seeds.rb
+
+# 既存の Student をいったんクリア（開発環境のみで使う場合）
+Student.delete_all
+
+# サンプル Student レコードを作成
+students = [
+  { email: 'alice@student.com', password: 'password', password_confirmation: 'password', graduation_year: 2025 },
+  { email: 'bob@student.com',   password: 'password', password_confirmation: 'password', graduation_year: 2026 },
+  { email: 'carol@student.com', password: 'password', password_confirmation: 'password', graduation_year: 2027 },
+  { email: 'test@test.com',     password: 'testpass', password_confirmation: 'testpass', graduation_year: 2027 }
+]
+
+students.each do |attrs|
+  Student.create!(attrs)
+end
+
+puts "Seeded #{Student.count} students."
