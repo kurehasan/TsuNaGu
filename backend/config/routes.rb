@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       get 'hello', to: 'hello#index'
       resources :users, only: [:index]
       resources :students, only: [:index, :show]
-      resources :messages, only: [:index, :create]
+      resources :messages, only: [:index, :show, :create]
     end
   end
 

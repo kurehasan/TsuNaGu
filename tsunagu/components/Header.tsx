@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const SawarabiGothic = Sawarabi_Gothic({ weight: "400", subsets: ["latin"] });
 
 export default function Header() {
+  const [role, setRole] = useState<'student' | 'company' | null>(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -16,6 +17,8 @@ export default function Header() {
   useEffect(() => {
     const token = localStorage.getItem('access-token')
     setIsLoggedIn(!!token)
+    const r = localStorage.getItem('role')
+    setRole(r === 'student' || r === 'company' ? r : null)
   }, [pathname])
 
   const openLogoutModal = () => setShowModal(true)
@@ -44,14 +47,35 @@ export default function Header() {
             <li>
               <Link href="*">Scout</Link>
             </li>
-            <li>
-              <Link href="*">Message</Link>
-            </li>
             {isLoggedIn ?
               <>
+                {role === 'student' &&
+                  <li>
+                    <Link href="/conversation/student">Message</Link>
+                  </li>}
+                {role === 'company' &&
+                  <li>
+                    <Link href="/conversation/company">Message</Link>
+                  </li>}
+              </>
+              :
+              <>
                 <li>
-                  <Link href="/mypage/student" className="header-list-last">MyPage</Link>
+                  <Link href="/login/student">Message</Link>
                 </li>
+              </>
+            }
+            {isLoggedIn ?
+              <>
+                {role === 'student' &&
+                  <li>
+                    <Link href="/mypage/student" className="header-list-last">MyPage</Link>
+                  </li>}
+                {role === 'company' &&
+                  <li>
+                    <Link href="/mypage/company" className="header-list-last">MyPage</Link>
+                  </li>}
+
                 <li onClick={openLogoutModal} className='header-list-last-second'>
                   <button>Logout</button>
                 </li>

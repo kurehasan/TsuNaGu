@@ -1,18 +1,35 @@
-# backend/db/seeds.rb
+# ── Student のサンプルデータ ──
 
-# 既存の Student をいったんクリア（開発環境のみで使う場合）
+# db/seeds.rb
+
 Student.delete_all
+Student.create!([
+  { email: 'student1@example.com',
+    password: 'password',
+    password_confirmation: 'password',
+    graduation_year: 2025 },
+  { email: 'student2@example.com',
+    password: 'password',
+    password_confirmation: 'password',
+    graduation_year: 2026 },
+])
+puts "Seeded #{Student.count} students."
 
-# サンプル Student レコードを作成
-students = [
-  { email: 'alice@student.com', password: 'password', password_confirmation: 'password', graduation_year: 2025 },
-  { email: 'bob@student.com',   password: 'password', password_confirmation: 'password', graduation_year: 2026 },
-  { email: 'carol@student.com', password: 'password', password_confirmation: 'password', graduation_year: 2027 },
-  { email: 'test@test.com',     password: 'testpass', password_confirmation: 'testpass', graduation_year: 2027 }
+# ── Company のサンプルデータ ──
+Company.delete_all
+
+companies = [
+  { email: 'corp1@company.com', password: 'password', password_confirmation: 'password', company_name: '株式会社サンプル1', description: 'サンプル企業1です' },
+  { email: 'corp2@company.com', password: 'password', password_confirmation: 'password', company_name: '株式会社サンプル2', description: 'サンプル企業2です' },
 ]
 
-students.each do |attrs|
-  Student.create!(attrs)
+companies.each do |attrs|
+  Company.find_or_create_by!(email: attrs[:email]) do |c|
+    c.password              = attrs[:password]
+    c.password_confirmation = attrs[:password_confirmation]
+    c.company_name          = attrs[:company_name]
+    c.description           = attrs[:description]
+  end
 end
 
-puts "Seeded #{Student.count} students."
+puts "Seeded #{Company.count} companies."

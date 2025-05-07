@@ -72,6 +72,22 @@ header,footer{
   right: 110;
 }
 
+.login-list{
+  display: flex;
+  float: right;
+  margin-top: 35px;
+}
+
+.footer-company-login{
+  font-size: 20px;
+  padding-right: 20px;
+}
+
+.footer-student-login{
+  font-size: 20px;
+  
+}
+
 /* ホーム画面 */
 /* タイトル */
 .About-title{

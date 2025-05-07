@@ -39,9 +39,10 @@ export default function CompanyLoginPage() {
       localStorage.setItem('uid',          uid)
       localStorage.setItem('expiry',       expiry)
       localStorage.setItem('token-type',   tokenType)
+      localStorage.setItem('role', 'company')
 
       // ログイン成功後、企業ダッシュボードへ遷移
-      router.push('/company/dashboard')
+      router.push('/mypage/company')
     } catch (err: any) {
       setError(err.message)
     }

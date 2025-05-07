@@ -39,6 +39,7 @@ export default function login() {
       localStorage.setItem('access-token', token || '');
       localStorage.setItem('client', client || '');
       localStorage.setItem('uid', uid || '');
+      localStorage.setItem('role', 'student')
 
       window.location.href = '/mypage/student';
     } catch (err) {

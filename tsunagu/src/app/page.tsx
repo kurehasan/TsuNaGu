@@ -1,5 +1,9 @@
+'use client'
+
 import Image from "next/image";
 import { Sawarabi_Gothic } from "next/font/google";
+import Link from "next/link";
+import { useState ,useEffect} from "react";
 
 const SaearabiGothicFont = Sawarabi_Gothic({
   weight: "400",
@@ -7,6 +11,12 @@ const SaearabiGothicFont = Sawarabi_Gothic({
 });
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+      const token = localStorage.getItem('access-token')
+      setIsLoggedIn(!!token)})
+  
   return (
     <div>
       {/* タイトル */}
@@ -38,11 +48,19 @@ export default function Home() {
       <div className="company-div">
         <h1 className={`${SaearabiGothicFont.className} company-title`}>企業様向け</h1>
         <div className="company-button">
-          <button className="company-signup">掲載希望の<br />企業様</button>
-          <button className="company-mypage">掲載企業<br />マイページ</button>
+          <Link href="/signup/company"><button className="company-signup">掲載希望の<br />企業様</button></Link>
+          {isLoggedIn ?
+            <>
+              <Link href="/mypage/company"><button className="company-mypage">掲載企業<br />マイページ</button></Link>
+            </>
+            :
+            <>
+              <Link href="/login/company"><button className="company-mypage">掲載企業<br />ログイン</button></Link>
+              </>
+          }
+            </div>
         </div>
       </div>
-    </div>
-  );
+      );
 
 }
