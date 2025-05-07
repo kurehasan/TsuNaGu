@@ -63,3 +63,8 @@ npm run dev
 /node_modules
 /.env*
 /frontend/.next
+
+## 機能
+・企業側から学生にスカウトが送れる
+・学生と企業がそれぞれログインできる
+・会員登録ができる
